@@ -1,2 +1,2 @@
 # rubber-duck-store
-Python command line e-commerce store to sell rubber ducks. (School project)
+Python command line e-commerce store. (School project)
