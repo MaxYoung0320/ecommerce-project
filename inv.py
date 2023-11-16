@@ -14,8 +14,24 @@ class inv():
     def inventory(self):
         print()
     def viewInventory(self):
+        try:
+            connection = sqlite3.connect("db.db")
 
+            print("Successful connection.")
+
+        except:
+            print("Failed connection.")
+
+            sys.exit()
+
+        print()
+
+        cursor = connection.cursor()
         cursor.execute("SELECT * FROM Inventory")
+
+        result = cursor.fetchall()
+        for i in result:
+            print(i[6])
 
         
 
@@ -36,13 +52,33 @@ class inv():
 
         book = input("Enter the title of the book: ")
         
+        cursor.execute(f"SELECT * FROM Inventory WHERE title LIKE '%{book}%'" )
+
+        result = cursor.fetchall()
+        for i in result:
+            print(i[1])
+        #print("Entire result set: ", result, sep="\n", end="\n\n\n") 
+
+    def decreaseStock(self, ISBN):
+        try:
+            connection = sqlite3.connect("db.db")
+
+            print("Successful connection.")
+
+        except:
+            print("Failed connection.")
+
+            sys.exit()
+
+        print()
+
+        cursor = connection.cursor()
+
         cursor.execute(f"SELECT * FROM Inventory WHERE title LIKE '{book}'" )
 
         result = cursor.fetchall()
-
-        print("Entire result set: ", result, sep="\n", end="\n\n\n")
-
-    def decreaseStock(self, ISBN):
-        print()
+        for i in result:
+            numbooks = i[6]
+            newnumbooks = numbooks - 1
     
 
