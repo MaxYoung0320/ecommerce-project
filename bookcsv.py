@@ -40,3 +40,6 @@ with open("books.csv") as f:
         connection.commit()
         print(cursor.rowcount, "record inserted.")
         print()
+
+
+        #SELECT OJGODKFG WHERE Title LIKE 'title'
