@@ -4,4 +4,4 @@ print("Hello World")
 
 viewInv = inv("", "")
 
-viewInv.viewInventory()
+viewInv.decreaseStock()

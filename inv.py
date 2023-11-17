@@ -31,7 +31,7 @@ class inv():
 
         result = cursor.fetchall()
         for i in result:
-            print(i[6])
+            print(i[1])
 
         
 
@@ -59,7 +59,7 @@ class inv():
             print(i[1])
         #print("Entire result set: ", result, sep="\n", end="\n\n\n") 
 
-    def decreaseStock(self, ISBN):
+    def decreaseStock(self):
         try:
             connection = sqlite3.connect("db.db")
 
@@ -73,12 +73,24 @@ class inv():
         print()
 
         cursor = connection.cursor()
-
-        cursor.execute(f"SELECT * FROM Inventory WHERE title LIKE '{book}'" )
-
+        
+        cursor.execute("SELECT * FROM Inventory")
         result = cursor.fetchall()
         for i in result:
+            print(i[0],"-", i[1])
+        book = input("Enter the isbn of the book to buy: ")
+
+        cursor.execute(f"SELECT * FROM Inventory WHERE isbn LIKE '{book}'" )
+
+        result1 = cursor.fetchall()
+        for i in result1:
+            print(i[0], i[1], i[6], "- old stock")
             numbooks = i[6]
+            isbn = i[0]
+            bookName = i[1]
             newnumbooks = numbooks - 1
+        cursor.execute(f"UPDATE Inventory SET stock = '{newnumbooks}' WHERE isbn = '{isbn}'")
+        print(isbn, bookName, newnumbooks, "- new stock")
+        
     
 
