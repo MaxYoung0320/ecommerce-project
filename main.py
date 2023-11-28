@@ -3,5 +3,6 @@ from inv import inv
 print("Hello World")
 
 viewInv = inv("", "")
-
-viewInv.decreaseStock()
+viewInv.viewInventory()
+isbn = input("Enter the isbn to delete: ")
+viewInv.decreaseStock(isbn)
