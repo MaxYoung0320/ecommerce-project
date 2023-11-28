@@ -2,6 +2,8 @@ from inv import inv
 from user import User
 from cart import Cart
 
+print("Hello World")
+
 # create class instances
 inventory = inv("db.db", "User")
 user = User("db.db", "User")
