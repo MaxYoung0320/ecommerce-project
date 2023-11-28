@@ -9,14 +9,67 @@ inventory = inv("db.db", "User")
 user = User("db.db", "User")
 cart = Cart("db.db", "Cart")
 
-while(1):
-    # second while loop is for the before login menu only
+def cartInfo():
+    while(1):
+        print("1 - view cart")
+        print("2 - add to cart")
+        print("3 - remove from cart")
+        print("4 - check out")
+        print("5 - Go Back")
+        choice = int(input("Enter a number"))
+        match choice:
+            case 1:
+                cart.viewCart()
+            case 2:
+                cart.addToCart()
+            case 3:
+                cart.removeFromCart()
+            case 4:
+                cart.checkOut()
+            case 5:
+                afterLogin()
+
+def invInfo():
+    while(1):
+        print("1 - view inventory")
+        print("2 - search inventory")
+        print("3 - Go Back")
+        choice1 = int(input("Enter a number"))
+        match choice1:
+            case 1:
+                inv.viewInventory
+            
+            case 2:
+                inv.searchInventory
+            
+            case 3:
+                afterLogin()
+
+def afterLogin():
+    while(1):
+        print("1 - view account information")
+        print("2 - Inventory information")
+        print("3 - cart information")
+        print("4 - Logout")
+        choice2 = int(input("Enter a number: "))
+        match choice2:
+            case 1:
+                user.viewAccountInformation()
+            case 2:
+                invInfo()
+            case 3:
+                cartInfo()
+            case 4:
+                user.logout()
+                break
+
+def beforeLogin():
     while(1):
         print("1 - Login")
         print("2 - Create Account")
-        print("3 - Logout")
-        choice = int(input("Enter a number: "))
-        match choice:
+        print("3 - Exit")
+        choice3 = int(input("Enter a number: "))
+        match choice3:
             case 1:
                 if(user.login()):
                     #will send the user to the next menu
@@ -25,11 +78,17 @@ while(1):
                     print()
             case 2:
                 user.createAccount()
-            case 3: 
-                if (not user.getLoggedIn()):
-                    print()
-                    print("You Are Already Logged Out")
-                    print()
-                else:
-                    user.logout()
+            case 3:
+                break
+
+            
+while(1):
+    beforeLogin()
+    if(not user.getLoggedIn):
+        break
+    afterLogin()
+
+
+    
+
 
