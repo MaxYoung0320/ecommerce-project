@@ -37,12 +37,14 @@ class User():
 
             if not result:
                 ## when the select query doesn't match an entry
-                print("The email and password does not match an exisiting account")
-                print("Try Again - 1")
-                print("Return To Main Menu - 2")
-                choice = input("Type a Number: ")
+                print()
+                print("Failed Login: The email and password does not match an exisiting account")
+                print("1 - Try Again")
+                print("2 - Return To Main Menu")
+                choice = int(input("Type a Number: "))
                 if (choice == 2):
                     return False
+                print()
             else:
                 ## sets userID/loggedIn
                 self.userID = result[0][-1]
@@ -80,6 +82,7 @@ class User():
 
     def createAccount(self):
         #inputs for account information
+        print()
         print("Enter Account Info")
         email = input("Enter Your Email: ")
         password = input("Enter Your Password: ")
