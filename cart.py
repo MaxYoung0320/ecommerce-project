@@ -9,8 +9,26 @@ class Cart():
         self.tableName = tableName
 
     def viewCart(self, userID, inventoryDatabase):
-        self.inventory.viewInventory()
+        try:
+            connection = sqlite3.connect(inventoryDatabase)
+            cursor = connection.cursor()
 
+            cursor.execute(f"SELECT ISBN FROM {self.tableName} WHERE userID = ?", (userID,))
+            items_in_cart = cursor.fetchall()
+
+            if not items_in_cart:
+                print("The cart is empty.")
+            else:
+                print("Items in the cart:")
+                for item in items_in_cart:
+                    print(f"ISBN: {item[0]}") 
+
+        except sqlite3.Error as error:
+            print("Failed to view cart:", error)
+
+        if connection:
+            connection.close()
+            
     def addToCart(self, userID, ISBN):
         try:
             connection = sqlite3.connect(self.databaseName)
