@@ -3,13 +3,13 @@ import sqlite3
 import sys
 
 class Cart():
+    inventory = inv("db.db", "User")
     def __init__(self, databaseName, tableName):
         self.databaseName = databaseName
         self.tableName = tableName
-        self.inventory_obj = inv(databaseName, tableName)  
 
     def viewCart(self, userID, inventoryDatabase):
-        self.inventory_obj.viewInventory(userID, inventoryDatabase)
+        self.inventory.viewInventory()
 
     def addToCart(self, userID, ISBN):
         try:

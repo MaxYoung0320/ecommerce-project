@@ -16,12 +16,15 @@ def cartInfo():
         print("3 - remove from cart")
         print("4 - check out")
         print("5 - Go Back")
-        choice = int(input("Enter a number"))
+        choice = int(input("Enter a number: "))
         match choice:
             case 1:
-                cart.viewCart()
+                cart.viewCart(user.getUserID(), inventory.viewInventory())
             case 2:
-                cart.addToCart()
+                inventory.viewInventory()
+                print()
+                isbn = input(print("Enter the ISBN of the book to purchase: "))
+                cart.addToCart(user.getUserID(), isbn)
             case 3:
                 cart.removeFromCart()
             case 4:
@@ -37,10 +40,10 @@ def invInfo():
         choice1 = int(input("Enter a number"))
         match choice1:
             case 1:
-                inv.viewInventory
+                inventory.viewInventory()
             
             case 2:
-                inv.searchInventory
+                inventory.searchInventory()
             
             case 3:
                 afterLogin()

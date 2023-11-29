@@ -75,11 +75,12 @@ class User():
         result = cursor.fetchall()[0]
         ## categories will match the query in result
         categories = ["Email", "Password", "First Name", "Last Name", "Address", "City", "State", "Zip", "Payment", "UserID"]
-
+        print()
         ##prints the category and its corresponding result
         for (cat, val) in zip(categories, result):
+            
             print(f"{cat}: {val}")
-
+        print()
     def createAccount(self):
         #inputs for account information
         print()
