@@ -2,7 +2,6 @@ from inv import inv
 from user import User
 from cart import Cart
 
-print("Hello World")
 
 # create class instances
 inventory = inv("db.db", "User")
@@ -11,6 +10,7 @@ cart = Cart("db.db", "Cart")
 
 def cartInfo():
     while(1):
+        print()
         print("1 - view cart")
         print("2 - add to cart")
         print("3 - remove from cart")
@@ -19,25 +19,32 @@ def cartInfo():
         choice = int(input("Enter a number: "))
         match choice:
             case 1:
-                cart.viewCart(user.getUserID(), inventory.viewInventory())
+                cart.viewCart(user.getUserID(), "db.db")
             case 2:
                 inventory.viewInventory()
                 print()
-                isbn = input(print("Enter the ISBN of the book to purchase: "))
+                isbn = input("Enter the ISBN of the book to purchase: ")
+                
                 cart.addToCart(user.getUserID(), isbn)
             case 3:
-                cart.removeFromCart()
+                cart.viewCart(user.getUserID(), "db.db")
+                print()
+                isbn2 = input("Enter the ISBN of the book to remove: ")
+
+                cart.removeFromCart(user.getUserID(), isbn2)
             case 4:
-                cart.checkOut()
+                cart.checkOut(user.getUserID())
             case 5:
                 afterLogin()
+                break
 
 def invInfo():
     while(1):
+        print()
         print("1 - view inventory")
         print("2 - search inventory")
         print("3 - Go Back")
-        choice1 = int(input("Enter a number"))
+        choice1 = int(input("Enter a number: "))
         match choice1:
             case 1:
                 inventory.viewInventory()
@@ -47,9 +54,11 @@ def invInfo():
             
             case 3:
                 afterLogin()
+                break
 
 def afterLogin():
     while(1):
+        print()
         print("1 - view account information")
         print("2 - Inventory information")
         print("3 - cart information")
@@ -68,6 +77,7 @@ def afterLogin():
 
 def beforeLogin():
     while(1):
+        print()
         print("1 - Login")
         print("2 - Create Account")
         print("3 - Exit")
@@ -87,9 +97,13 @@ def beforeLogin():
             
 while(1):
     beforeLogin()
-    if(not user.getLoggedIn):
+    if(not user.getLoggedIn()):
         break
     afterLogin()
+    if(not user.getLoggedIn()):
+        break
+print()
+print("Thanks for Shopping!")
 
 
     

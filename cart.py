@@ -9,6 +9,7 @@ class Cart():
         self.tableName = tableName
 
     def viewCart(self, userID, inventoryDatabase):
+        inventoryDatabase=self.databaseName
         try:
             connection = sqlite3.connect(inventoryDatabase)
             cursor = connection.cursor()
@@ -34,7 +35,7 @@ class Cart():
             connection = sqlite3.connect(self.databaseName)
             cursor = connection.cursor()
             
-            cursor.execute(f"INSERT INTO {self.tableName} VALUES (?, ?)", (userID, ISBN))
+            cursor.execute(f"INSERT INTO {self.tableName} VALUES (?, ?, ?)", (userID, ISBN, 1))
             connection.commit()
             
             print("Book added to the cart successfully.")
@@ -52,9 +53,9 @@ class Cart():
 
             cursor.execute(f"DELETE FROM {self.tableName} WHERE userID = ? AND ISBN = ?", (userID, ISBN))
             connection.commit()
-
+            print()
             print("Book removed from the cart successfully.")
-
+            print()
         except sqlite3.Error as error:
             print("Failed to remove book from the cart:", error)
 
@@ -67,7 +68,7 @@ class Cart():
             cursor = connection.cursor()
 
             cursor.execute(f"SELECT ISBN FROM {self.tableName} WHERE userID = ?", (userID,))
-            books_in_cart = cursor.fetchall()
+            books_in_cart = cursor.fetchall()[0]
 
             cursor.execute(f"DELETE FROM {self.tableName} WHERE userID = ?", (userID,))
             connection.commit()
@@ -75,7 +76,9 @@ class Cart():
             print("Checked out successfully.")
 
             for book in books_in_cart:
-                self.inventory_obj.decreaseStock(book[0]) 
+            
+                inv.decreaseStock(self, book)
+                connection.commit()
                 
         except sqlite3.Error as error:
             print("Failed to check out:", error)

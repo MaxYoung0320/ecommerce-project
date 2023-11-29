@@ -31,7 +31,7 @@ class inv():
 
         result = cursor.fetchall()
         for i in result:
-            print(i[0], i[1])
+            print(i[0], i[1], i[6])
 
         
 
