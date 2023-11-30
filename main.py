@@ -35,7 +35,6 @@ def cartInfo():
             case 4:
                 cart.checkOut(user.getUserID())
             case 5:
-                afterLogin()
                 break
 
 def invInfo():
@@ -53,7 +52,6 @@ def invInfo():
                 inventory.searchInventory()
             
             case 3:
-                afterLogin()
                 break
 
 def afterLogin():
